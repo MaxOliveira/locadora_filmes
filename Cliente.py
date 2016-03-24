@@ -16,8 +16,8 @@ class Cliente():
     def __init__(self, nome):
         self._nome = nome
         self._alocacoes = []
-    def addicionarAlocacao(self, arg): # art de tipo alocacao
-        self._alocacoes.append(arg)
+    def addicionarAlocacao(self, alocacao): # art de tipo alocacao
+        self._alocacoes.append(alocacao)
     def getNome(self):
         return self._nome
     def Expresao(self):
@@ -47,8 +47,8 @@ class Cliente():
             pontosFrequenciaAlocacao = self.addPontosFrequenciaAlocacao(pontosFrequenciaAlocacao)
 
             #adicionar bonus para uma locação de dois dias para lançamentos
-            if cada.getFilme().getPrecoCodigo() == Filme.NOVA_RELEASE and cada.getDiasAlocados()>1:
-                pontosFrequenciaAlocacao = pontosFrequenciaAlocacao +1
+            pontosFrequenciaAlocacao = self.bonusAlocacao(cada, pontosFrequenciaAlocacao)
+
             #mostrar informacoes para esta locacao
             resultado = resultado + ' '+cada.getFilme().getTitulo()+' '+ str(estaQuantidade)+'\n'
 
@@ -59,6 +59,12 @@ class Cliente():
 
     def addPontosFrequenciaAlocacao(self, pontosFrequenciaAlocacao):
         return pontosFrequenciaAlocacao + 1
+
+    def bonusAlocacao(self, cada, pontosFrequenciaAlocacao):
+        if cada.getFilme().getPrecoCodigo() == Filme.NOVA_RELEASE and cada.getDiasAlocados()>1:
+            return pontosFrequenciaAlocacao +1
+        else:
+            return pontosFrequenciaAlocacao
 
 if __name__ == '__main__':
     meuCliente = Cliente('Ruben')
