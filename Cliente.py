@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 #import java.util.Enumeration;
 #import java.util.Vector;
 from Filme import Filme
@@ -44,7 +44,8 @@ class Cliente():
                     estaQuantidade = estaQuantidade + (cada.getDiasAlocados()-3)*1.5
 
             #adicionar pontos de locador frequente
-            pontosFrequenciaAlocacao = pontosFrequenciaAlocacao + 1
+            pontosFrequenciaAlocacao = self.addPontosFrequenciaAlocacao(pontosFrequenciaAlocacao)
+
             #adicionar bonus para uma locação de dois dias para lançamentos
             if cada.getFilme().getPrecoCodigo() == Filme.NOVA_RELEASE and cada.getDiasAlocados()>1:
                 pontosFrequenciaAlocacao = pontosFrequenciaAlocacao +1
@@ -55,6 +56,9 @@ class Cliente():
         resultado = resultado + "Quantia devida é "+ str(totalQuantidade)+"\n"
         resultado = resultado + 'Voce ganhou '+ str(pontosFrequenciaAlocacao)+' pontos de locacao.'
         return resultado
+
+    def addPontosFrequenciaAlocacao(self, pontosFrequenciaAlocacao):
+        return pontosFrequenciaAlocacao + 1
 
 if __name__ == '__main__':
     meuCliente = Cliente('Ruben')
