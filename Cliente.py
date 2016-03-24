@@ -23,34 +23,26 @@ class Cliente():
     def Expresao(self):
         totalQuantidade = 0.0
         pontosFrequenciaAlocacao = 0
-        alocacoes = iter(self._alocacoes)
+        listaDeAlocacoes = iter(self._alocacoes)
         resultado = 'Registro de Locação para : '+ self.getNome()+'\n'
 
         #while(alocacoes):
-        for cada in alocacoes:
+        for alocacao in listaDeAlocacoes:
             estaQuantidade = 0.0
-            #cada = next(alocacoes) #cada tipo alocacao
-            #cada dever ser de tipo alocacao
-            #Determinar valores para cada linha
-            if cada.getFilme().getPrecoCodigo() == REGULAR:
-                estaQuantidade = estaQuantidade + 2
-                if cada.getDiasAlocados()>2:
-                    estaQuantidade = estaQuantidade + (cada.getDiasAlocados()-2)*1.5
-            elif cada.getFilme().getPrecoCodigo() == NOVA_RELEASE:
-                estaQuantidade = estaQuantidade + 3
-            elif cada.getFilme().getPrecoCodigo() == CRIANCAS:
-                estaQuantidade = estaQuantidade + 1.5
-                if cada.getDiasAlocados()>3:
-                    estaQuantidade = estaQuantidade + (cada.getDiasAlocados()-3)*1.5
+
+            #alocacao = next(alocacoes) #alocacao tipo alocacao
+            #alocacao dever ser de tipo alocacao
+            #Determinar valores para alocacao linha
+            estaQuantidade = self.quantidadePara(alocacao,estaQuantidade)
 
             #adicionar pontos de locador frequente
             pontosFrequenciaAlocacao = self.addPontosFrequenciaAlocacao(pontosFrequenciaAlocacao)
 
             #adicionar bonus para uma locação de dois dias para lançamentos
-            pontosFrequenciaAlocacao = self.bonusAlocacao(cada, pontosFrequenciaAlocacao)
+            pontosFrequenciaAlocacao = self.bonusAlocacao(alocacao, pontosFrequenciaAlocacao)
 
             #mostrar informacoes para esta locacao
-            resultado = resultado + ' '+cada.getFilme().getTitulo()+' '+ str(estaQuantidade)+'\n'
+            resultado = resultado + ' '+alocacao.getFilme().getTitulo()+' '+ str(estaQuantidade)+'\n'
 
         #adicionar rodape do relatorio
         resultado = resultado + "Quantia devida é "+ str(totalQuantidade)+"\n"
@@ -60,11 +52,24 @@ class Cliente():
     def addPontosFrequenciaAlocacao(self, pontosFrequenciaAlocacao):
         return pontosFrequenciaAlocacao + 1
 
-    def bonusAlocacao(self, cada, pontosFrequenciaAlocacao):
-        if cada.getFilme().getPrecoCodigo() == Filme.NOVA_RELEASE and cada.getDiasAlocados()>1:
+    def bonusAlocacao(self, alocacao, pontosFrequenciaAlocacao):
+        if alocacao.getFilme().getPrecoCodigo() == Filme.NOVA_RELEASE and alocacao.getDiasAlocados() > 1:
             return pontosFrequenciaAlocacao +1
         else:
             return pontosFrequenciaAlocacao
+
+    def quantidadePara(self, alocacao, estaQuantidade):
+        if alocacao.getFilme().getPrecoCodigo() == REGULAR:
+            estaQuantidade = estaQuantidade + 2
+            if alocacao.getDiasAlocados() > 2:
+                estaQuantidade = estaQuantidade + (alocacao.getDiasAlocados() - 2) * 1.5
+        elif alocacao.getFilme().getPrecoCodigo() == NOVA_RELEASE:
+            estaQuantidade = estaQuantidade + 3
+        elif alocacao.getFilme().getPrecoCodigo() == CRIANCAS:
+            estaQuantidade = estaQuantidade + 1.5
+            if alocacao.getDiasAlocados() > 3:
+                estaQuantidade = estaQuantidade + (alocacao.getDiasAlocados()-3) * 1.5
+        return estaQuantidade
 
 if __name__ == '__main__':
     meuCliente = Cliente('Ruben')
