@@ -31,28 +31,19 @@ class Cliente():
             estaQuantidade = Alocacao.quantidadeAlocacoesPorCodigo(alocacao)
 
             #adicionar pontos de locador frequente
-            pontosFrequenciaAlocacao = self.addPontosFrequenciaAlocacao(pontosFrequenciaAlocacao)
+            pontosFrequenciaAlocacao = Alocacao.addPontosFrequenciaAlocacao(alocacao, pontosFrequenciaAlocacao)
 
             #adicionar bonus para uma locação de dois dias para lançamentos
-            bonusAlocacao = self.bonusAlocacao(alocacao, pontosFrequenciaAlocacao)
+            bonusAlocacao = Alocacao.bonusAlocacao(alocacao, pontosFrequenciaAlocacao)
 
             #mostrar informacoes para esta locacao
             resultado = resultado + ' '+alocacao.getFilme().getTitulo()+' '+ str(estaQuantidade)+'\n'
             totalQuantidade = totalQuantidade + estaQuantidade
-            
+
         #adicionar rodape do relatorio
         resultado = resultado + "Quantia devida é "+ str(totalQuantidade)+"\n"
         resultado = resultado + 'Voce ganhou '+ str(pontosFrequenciaAlocacao)+' pontos de locacao.'
         return resultado
-
-    def addPontosFrequenciaAlocacao(self, pontosFrequenciaAlocacao):
-        return pontosFrequenciaAlocacao + 1
-
-    def bonusAlocacao(self, alocacao, pontosFrequenciaAlocacao):
-        if alocacao.getFilme().getPrecoCodigo() == Filme.NOVA_RELEASE and alocacao.getDiasAlocados() > 1:
-            return pontosFrequenciaAlocacao +1
-        else:
-            return pontosFrequenciaAlocacao
 
 if __name__ == '__main__':
     meuCliente = Cliente('Ruben')

@@ -28,5 +28,15 @@ class Alocacao:
                 resultado = resultado + (self.getDiasAlocados()-3) * 1.5
         return resultado
 
+    def addPontosFrequenciaAlocacao(self, pontosFrequenciaAlocacao):
+        pontosFrequenciaAlocacao += 1
+        return pontosFrequenciaAlocacao
+
+    def bonusAlocacao(self, pontosFrequenciaAlocacao):
+        if self.getFilme().getPrecoCodigo() == Filme.NOVA_RELEASE and self.getDiasAlocados() > 1:
+            return pontosFrequenciaAlocacao +1
+        else:
+            return pontosFrequenciaAlocacao
+
 if __name__ == '__main__':
     minhaAlocacao = Alocacao()
