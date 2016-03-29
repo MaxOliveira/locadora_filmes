@@ -24,11 +24,11 @@ class Cliente():
 
         #while(alocacoes):
         for alocacao in listaDeAlocacoes:
-            estaQuantidade = 0
+            quantidadePorAlocacao = 0
             #alocacao = next(alocacoes) #alocacao tipo alocacao
             #alocacao dever ser de tipo alocacao
             #Determinar valores para alocacao linha
-            estaQuantidade = Alocacao.quantidadeAlocacoesPorCodigo(alocacao)
+            quantidadePorAlocacao = Alocacao.quantidadeAlocacoesPorCodigo(alocacao)
 
             #adicionar pontos de locador frequente
             pontosFrequenciaAlocacao = Alocacao.addPontosFrequenciaAlocacao(alocacao, pontosFrequenciaAlocacao)
@@ -37,8 +37,8 @@ class Cliente():
             bonusAlocacao = Alocacao.bonusAlocacao(alocacao, pontosFrequenciaAlocacao)
 
             #mostrar informacoes para esta locacao
-            resultado = resultado + ' '+alocacao.getFilme().getTitulo()+' '+ str(estaQuantidade)+'\n'
-            totalQuantidade = totalQuantidade + estaQuantidade
+            resultado = resultado + ' '+alocacao.getFilme().getTituloFilme()+' '+ str(quantidadePorAlocacao)+'\n'
+            totalQuantidade = totalQuantidade + quantidadePorAlocacao
 
         #adicionar rodape do relatorio
         resultado = resultado + "Quantia devida é "+ str(totalQuantidade)+"\n"

@@ -10,11 +10,11 @@ class Filme:
     def __init__(self,titulo,precoCodigo):
         self._titulo = titulo
         self._precoCodigo = precoCodigo
-    def getPrecoCodigo(self):
+    def getPrecoPorCodigo(self):
         return self._precoCodigo
-    def setPrecoCodigo(self, arg):
+    def setPrecoPorCodigo(self, arg):
         self._precoCodigo = arg
-    def getTitulo(self):
+    def getTituloFilme(self):
         return self._titulo
 
 if __name__ == '__main__':
