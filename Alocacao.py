@@ -6,7 +6,7 @@ REGULAR = 0
 NOVA_RELEASE = 1
 
 class Alocacao:
-    def __init__(self,filme, diasAlocado): #filme de tipo Filme
+    def __init__(self, filme, diasAlocado): #filme de tipo Filme
         self._filme = filme #Tipo filme
         self._diasAlocados = diasAlocado
     def getDiasAlocados(self):
@@ -14,17 +14,17 @@ class Alocacao:
     def getFilme(self):
         return self._filme
 
-    def quantidadePara(alocacao, estaQuantidade):
-        if alocacao.getFilme().getPrecoCodigo() == REGULAR:
+    def quantidadePara(self, estaQuantidade):
+        if self.getFilme().getPrecoCodigo() == REGULAR:
             estaQuantidade = estaQuantidade + 2
-            if alocacao.getDiasAlocados() > 2:
-                estaQuantidade = estaQuantidade + (alocacao.getDiasAlocados() - 2) * 1.5
-        elif alocacao.getFilme().getPrecoCodigo() == NOVA_RELEASE:
+            if self.getDiasAlocados() > 2:
+                estaQuantidade = estaQuantidade + (self.getDiasAlocados() - 2) * 1.5
+        elif self.getFilme().getPrecoCodigo() == NOVA_RELEASE:
             estaQuantidade = estaQuantidade + 3
-        elif alocacao.getFilme().getPrecoCodigo() == CRIANCAS:
+        elif self.getFilme().getPrecoCodigo() == CRIANCAS:
             estaQuantidade = estaQuantidade + 1.5
-            if alocacao.getDiasAlocados() > 3:
-                estaQuantidade = estaQuantidade + (alocacao.getDiasAlocados()-3) * 1.5
+            if self.getDiasAlocados() > 3:
+                estaQuantidade = estaQuantidade + (self.getDiasAlocados()-3) * 1.5
         return estaQuantidade
 
 if __name__ == '__main__':

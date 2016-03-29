@@ -28,17 +28,19 @@ class Cliente():
             #alocacao = next(alocacoes) #alocacao tipo alocacao
             #alocacao dever ser de tipo alocacao
             #Determinar valores para alocacao linha
-            estaQuantidade = Alocacao.quantidadePara(alocacao,estaQuantidade)
+            estaQuantidade = Alocacao.quantidadePara(alocacao, estaQuantidade)
 
             #adicionar pontos de locador frequente
             pontosFrequenciaAlocacao = self.addPontosFrequenciaAlocacao(pontosFrequenciaAlocacao)
 
             #adicionar bonus para uma locação de dois dias para lançamentos
-            pontosFrequenciaAlocacao = self.bonusAlocacao(alocacao, pontosFrequenciaAlocacao)
+            bonusAlocacao = self.bonusAlocacao(alocacao, pontosFrequenciaAlocacao)
 
             #mostrar informacoes para esta locacao
             resultado = resultado + ' '+alocacao.getFilme().getTitulo()+' '+ str(estaQuantidade)+'\n'
 
+            totalQuantidade = estaQuantidade + pontosFrequenciaAlocacao
+            
         #adicionar rodape do relatorio
         resultado = resultado + "Quantia devida é "+ str(totalQuantidade)+"\n"
         resultado = resultado + 'Voce ganhou '+ str(pontosFrequenciaAlocacao)+' pontos de locacao.'
