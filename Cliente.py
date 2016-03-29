@@ -23,26 +23,31 @@ class Cliente():
         resultado = 'Registro de Locação para : '+ self.getNome()+'\n'
 
         #while(alocacoes):
-        for alocacao in listaDeAlocacoes:
-            quantidadePorAlocacao = 0
-            #alocacao = next(alocacoes) #alocacao tipo alocacao
-            #alocacao dever ser de tipo alocacao
-            #Determinar valores para alocacao linha
-            quantidadePorAlocacao = Alocacao.quantidadeAlocacoesPorCodigo(alocacao)
+        for cadaAlocacao in listaDeAlocacoes:
+            charge = 0
 
-            #adicionar pontos de locador frequente
-            pontosFrequenciaAlocacao = Alocacao.addPontosFrequenciaAlocacao(alocacao, pontosFrequenciaAlocacao)
+            pontosFrequenciaAlocacao = Alocacao.getPontosFrequenciaAlocacao(cadaAlocacao)
 
-            #adicionar bonus para uma locação de dois dias para lançamentos
-            bonusAlocacao = Alocacao.bonusAlocacao(alocacao, pontosFrequenciaAlocacao)
+            bonusAlocacao = Alocacao.getBonusAlocacao(cadaAlocacao)
 
-            #mostrar informacoes para esta locacao
-            resultado = resultado + ' '+alocacao.getFilme().getTituloFilme()+' '+ str(quantidadePorAlocacao)+'\n'
-            totalQuantidade = totalQuantidade + quantidadePorAlocacao
+            resultado = resultado + ' '+cadaAlocacao.getFilme().getTituloFilme()+' '+ str(cadaAlocacao.getCharge())+'\n'
 
-        #adicionar rodape do relatorio
-        resultado = resultado + "Quantia devida é "+ str(totalQuantidade)+"\n"
-        resultado = resultado + 'Voce ganhou '+ str(pontosFrequenciaAlocacao)+' pontos de locacao.'
+        resultado = resultado + "Quantia devida é "+ str(self.getTotalAlocacao())+"\n"
+        resultado = resultado + 'Voce ganhou '+ str(self.getTotalPontosFrequenciaAlocacao())+' pontos de locacao.'
+        return resultado
+
+    def getTotalAlocacao(self):
+        resultado = 0
+        listaDeAlocacoes = iter(self._alocacoes)
+        for cadaAlocacao in listaDeAlocacoes:
+            resultado = resultado + cadaAlocacao.getCharge()
+        return resultado
+
+    def getTotalPontosFrequenciaAlocacao(self):
+        resultado = 0.0
+        listaDeAlocacoes = iter(self._alocacoes)
+        for cadaAlocacao in listaDeAlocacoes:
+            resultado = resultado + cadaAlocacao.getPontosFrequenciaAlocacao()
         return resultado
 
 if __name__ == '__main__':
@@ -50,8 +55,8 @@ if __name__ == '__main__':
     print meuCliente.getNome()
     fil01 = Filme('Titanic',2)
     alo01 = Alocacao(fil01,5) #filme, dias locados
-    alo02 = Alocacao(fil01,2) #filme, dias locados
-    alo03 = Alocacao(fil01,1) #filme, dias locados
+    alo02 = Alocacao(fil01,5) #filme, dias locados
+    alo03 = Alocacao(fil01,6) #filme, dias locados
 
     meuCliente.addicionarAlocacao(alo01)
     meuCliente.addicionarAlocacao(alo02)
