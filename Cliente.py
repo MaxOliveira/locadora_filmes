@@ -5,10 +5,6 @@ from Filme import Filme
 from Alocacao import Alocacao
 import itertools
 
-CRIANCAS = 2
-REGULAR = 0
-NOVA_RELEASE = 1
-
 class Cliente():
     _nome = None
     _alocacoes = []
@@ -28,12 +24,11 @@ class Cliente():
 
         #while(alocacoes):
         for alocacao in listaDeAlocacoes:
-            estaQuantidade = 0.0
-
+            estaQuantidade = 0
             #alocacao = next(alocacoes) #alocacao tipo alocacao
             #alocacao dever ser de tipo alocacao
             #Determinar valores para alocacao linha
-            estaQuantidade = self.quantidadePara(alocacao,estaQuantidade)
+            estaQuantidade = Alocacao.quantidadePara(alocacao,estaQuantidade)
 
             #adicionar pontos de locador frequente
             pontosFrequenciaAlocacao = self.addPontosFrequenciaAlocacao(pontosFrequenciaAlocacao)
@@ -57,19 +52,6 @@ class Cliente():
             return pontosFrequenciaAlocacao +1
         else:
             return pontosFrequenciaAlocacao
-
-    def quantidadePara(self, alocacao, estaQuantidade):
-        if alocacao.getFilme().getPrecoCodigo() == REGULAR:
-            estaQuantidade = estaQuantidade + 2
-            if alocacao.getDiasAlocados() > 2:
-                estaQuantidade = estaQuantidade + (alocacao.getDiasAlocados() - 2) * 1.5
-        elif alocacao.getFilme().getPrecoCodigo() == NOVA_RELEASE:
-            estaQuantidade = estaQuantidade + 3
-        elif alocacao.getFilme().getPrecoCodigo() == CRIANCAS:
-            estaQuantidade = estaQuantidade + 1.5
-            if alocacao.getDiasAlocados() > 3:
-                estaQuantidade = estaQuantidade + (alocacao.getDiasAlocados()-3) * 1.5
-        return estaQuantidade
 
 if __name__ == '__main__':
     meuCliente = Cliente('Ruben')
