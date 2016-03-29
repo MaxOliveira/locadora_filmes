@@ -16,7 +16,7 @@ class Cliente():
         self._alocacoes.append(alocacao)
     def getNome(self):
         return self._nome
-    def Expresao(self):
+    def ExpresaoParaCalcularDadosDeAlocacao(self):
         totalQuantidade = 0.0
         pontosFrequenciaAlocacao = 0
         listaDeAlocacoes = iter(self._alocacoes)
@@ -28,7 +28,7 @@ class Cliente():
             #alocacao = next(alocacoes) #alocacao tipo alocacao
             #alocacao dever ser de tipo alocacao
             #Determinar valores para alocacao linha
-            estaQuantidade = Alocacao.quantidadePara(alocacao, estaQuantidade)
+            estaQuantidade = Alocacao.quantidadeAlocacoesPorCodigo(alocacao)
 
             #adicionar pontos de locador frequente
             pontosFrequenciaAlocacao = self.addPontosFrequenciaAlocacao(pontosFrequenciaAlocacao)
@@ -38,8 +38,7 @@ class Cliente():
 
             #mostrar informacoes para esta locacao
             resultado = resultado + ' '+alocacao.getFilme().getTitulo()+' '+ str(estaQuantidade)+'\n'
-
-            totalQuantidade = estaQuantidade + pontosFrequenciaAlocacao
+            totalQuantidade = totalQuantidade + estaQuantidade
             
         #adicionar rodape do relatorio
         resultado = resultado + "Quantia devida é "+ str(totalQuantidade)+"\n"
@@ -67,4 +66,4 @@ if __name__ == '__main__':
     meuCliente.addicionarAlocacao(alo02)
     meuCliente.addicionarAlocacao(alo03)
 
-    print meuCliente.Expresao()
+    print meuCliente.ExpresaoParaCalcularDadosDeAlocacao()

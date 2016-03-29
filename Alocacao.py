@@ -14,18 +14,19 @@ class Alocacao:
     def getFilme(self):
         return self._filme
 
-    def quantidadePara(self, estaQuantidade):
+    def quantidadeAlocacoesPorCodigo(self):
+        resultado = 0.0
         if self.getFilme().getPrecoCodigo() == REGULAR:
-            estaQuantidade = estaQuantidade + 2
+            resultado = resultado + 2
             if self.getDiasAlocados() > 2:
-                estaQuantidade = estaQuantidade + (self.getDiasAlocados() - 2) * 1.5
+                resultado = resultado + (self.getDiasAlocados() - 2) * 1.5
         elif self.getFilme().getPrecoCodigo() == NOVA_RELEASE:
-            estaQuantidade = estaQuantidade + 3
+            resultado = resultado + 3
         elif self.getFilme().getPrecoCodigo() == CRIANCAS:
-            estaQuantidade = estaQuantidade + 1.5
+            resultado = resultado + 1.5
             if self.getDiasAlocados() > 3:
-                estaQuantidade = estaQuantidade + (self.getDiasAlocados()-3) * 1.5
-        return estaQuantidade
+                resultado = resultado + (self.getDiasAlocados()-3) * 1.5
+        return resultado
 
 if __name__ == '__main__':
     minhaAlocacao = Alocacao()
